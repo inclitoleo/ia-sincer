@@ -1,6 +1,0 @@
-# Smithery configuration file
-# https://smithery.ai/docs/config
-
-name: ia-sincer
-description: A system skill & prompt designed to turn AI assistants into pragmatic, no-nonsense technical advisors.
-repositoryUrl: https://github.com/inclitoleo/ia-sincer

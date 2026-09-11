@@ -85,7 +85,6 @@ ia-sincer/
 ├── README.md
 ├── install.sh        # Interactive Bash installer
 ├── package.json      # Node CLI config
-├── smithery.yaml     # Smithery.ai MCP configuration
 ├── bin/
 │   └── cli.js        # Interactive Node CLI
 ├── en/
