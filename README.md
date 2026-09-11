@@ -8,26 +8,31 @@ Available in:
 
 ---
 
-## ⚡ 1-Command Quick Install / Instalação Rápida em 1 Comando
+## ⚡ Instalação Rápida Interativa
 
-You can install `ia-sincer` across **Gemini/Antigravity**, **Claude Code**, and **OpenAI Codex** automatically with one command:
+Ao rodar o instalador sem flags, ele exibirá um **menu interativo no terminal** para você escolher em quais IAs deseja instalar:
 
-### Option A: Via NPX (Direct from GitHub)
+### Via NPX (Direct from GitHub)
 ```bash
-# Português (Padrão)
+# Menu interativo
 npx github:inclitoleo/ia-sincer
 
-# English
-npx github:inclitoleo/ia-sincer --en
+# Instalar em uma IA específica diretamente
+npx github:inclitoleo/ia-sincer --gemini
+npx github:inclitoleo/ia-sincer --claude
+npx github:inclitoleo/ia-sincer --codex
+npx github:inclitoleo/ia-sincer --all --en   # Em inglês
 ```
 
-### Option B: Via Curl / Bash
+### Via Curl / Bash
 ```bash
-# Português
+# Menu interativo
 curl -fsSL https://raw.githubusercontent.com/inclitoleo/ia-sincer/main/install.sh | bash
 
-# English
-curl -fsSL https://raw.githubusercontent.com/inclitoleo/ia-sincer/main/install.sh | bash -s -- --lang en
+# Instalar em uma IA específica diretamente
+curl -fsSL https://raw.githubusercontent.com/inclitoleo/ia-sincer/main/install.sh | bash -s -- --gemini
+curl -fsSL https://raw.githubusercontent.com/inclitoleo/ia-sincer/main/install.sh | bash -s -- --claude
+curl -fsSL https://raw.githubusercontent.com/inclitoleo/ia-sincer/main/install.sh | bash -s -- --codex
 ```
 
 ---
@@ -47,84 +52,23 @@ curl -fsSL https://raw.githubusercontent.com/inclitoleo/ia-sincer/main/install.s
 
 Antigravity automatically discovers skills in `~/.gemini/config/skills/` (global) or `.agents/skills/` (project-specific).
 
-#### Global Installation (All Projects):
 ```bash
-# Português
 mkdir -p ~/.gemini/config/skills/ai-sincer
 curl -fsSL https://raw.githubusercontent.com/inclitoleo/ia-sincer/main/pt_br/SKILL.md -o ~/.gemini/config/skills/ai-sincer/SKILL.md
-
-# English
-mkdir -p ~/.gemini/config/skills/ai-sincer
-curl -fsSL https://raw.githubusercontent.com/inclitoleo/ia-sincer/main/en/SKILL.md -o ~/.gemini/config/skills/ai-sincer/SKILL.md
 ```
-
-#### Project-Specific Installation:
-```bash
-mkdir -p .agents/skills/ai-sincer
-cp path/to/ia-sincer/pt_br/SKILL.md .agents/skills/ai-sincer/SKILL.md
-```
-
----
 
 ### 2. 🤖 Claude Code (Anthropic CLI)
 
-Claude Code supports custom project and global instructions via `CLAUDE.md`.
-
-#### Global Setup:
-Append the contents of `SKILL.md` (Portuguese or English) to your global `CLAUDE.md`:
 ```bash
 mkdir -p ~/.claude
 curl -fsSL https://raw.githubusercontent.com/inclitoleo/ia-sincer/main/pt_br/SKILL.md >> ~/.claude/CLAUDE.md
 ```
 
-#### Project Setup:
-Create or append to the `CLAUDE.md` file in the root of your project:
-```bash
-curl -fsSL https://raw.githubusercontent.com/inclitoleo/ia-sincer/main/pt_br/SKILL.md >> CLAUDE.md
-```
-
----
-
 ### 3. 💻 OpenAI Codex / Custom System Prompts
 
-For OpenAI Codex CLI, Custom Instructions, or API integrations:
-
-#### System Prompt / `.codex/instructions.md`:
-1. Copy the text from [pt_br/SKILL.md](pt_br/SKILL.md) or [en/SKILL.md](en/SKILL.md).
-2. Paste it into your project's custom instructions file (e.g., `.codex/instructions.md` or `.cursorrules` / `.github/copilot-instructions.md`).
-
-#### Quick Command:
 ```bash
-mkdir -p .codex
-curl -fsSL https://raw.githubusercontent.com/inclitoleo/ia-sincer/main/en/SKILL.md -o .codex/instructions.md
-```
-
----
-
-### 4. 🐳 DeepSeek (Web UI, API, Open-WebUI, Ollama)
-
-DeepSeek models excel with system prompts. You can integrate `ia-sincer` as a system prompt or custom instructions.
-
-#### DeepSeek Web / Mobile App:
-- Open **Custom Instructions** (Instruções Personalizadas) in your account settings.
-- Paste the content of [pt_br/SKILL.md](pt_br/SKILL.md) or [en/SKILL.md](en/SKILL.md).
-
-#### Open-WebUI / Ollama / API:
-When sending requests to the DeepSeek API or running via Open-WebUI / Ollama, set the `system` parameter to the content of `SKILL.md`:
-```json
-{
-  "model": "deepseek-coder",
-  "messages": [
-    {
-      "role": "system",
-      "content": "<paste SKILL.md content here>"
-    },
-    {
-      "role": "user",
-      "content": "Your technical prompt..."
-    }
-  ]
-}
+mkdir -p ~/.codex
+curl -fsSL https://raw.githubusercontent.com/inclitoleo/ia-sincer/main/pt_br/SKILL.md >> ~/.codex/instructions.md
 ```
 
 ---
@@ -134,11 +78,11 @@ When sending requests to the DeepSeek API or running via Open-WebUI / Ollama, se
 ```
 ia-sincer/
 ├── README.md
-├── install.sh        # Installer script (Bash)
+├── install.sh        # Interactive Bash installer
 ├── package.json      # Node CLI config
 ├── smithery.yaml     # Smithery.ai MCP configuration
 ├── bin/
-│   └── cli.js        # Installer CLI (NPX)
+│   └── cli.js        # Interactive Node CLI
 ├── pt_br/
 │   └── SKILL.md      # Skill em Português
 └── en/
