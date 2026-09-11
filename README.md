@@ -3,8 +3,8 @@
 > A system skill & prompt designed to turn AI assistants into pragmatic, no-nonsense technical advisors. It eliminates verbose answers, unnecessary lists of options, and condescending validation, prioritizing the single best technical solution while demanding clarity from the user whenever context is weak or flawed.
 
 Available in:
-- 🇺🇸 **[English (en)](en/SKILL.md)** (Default)
-- 🇧🇷 **[Portuguese (pt_br)](pt_br/SKILL.md)**
+- 🇧🇷 **[Portuguese (pt_br)](pt_br/SKILL.md)** (Default)
+- 🇺🇸 **[English (en)](en/SKILL.md)**
 
 ---
 
@@ -12,31 +12,29 @@ Available in:
 
 Run the interactive installer or specify your target AI directly in the command:
 
-### 🤖 Via NPX (NPM Registry)
+### 🤖 Via NPX
 ```bash
-# Interactive menu (Default: English)
-npx ia-sincer
-
-# Install to a specific AI assistant
+# Default (Installs in Portuguese / pt_br)
 npx ia-sincer claude
 npx ia-sincer gemini
 npx ia-sincer codex
 npx ia-sincer all
+
+# Interactive menu
+npx ia-sincer
 ```
 
-> 💡 **Language Selection:** By default, the installer deploys the English version. To install the Portuguese version, add `pt` to the command (e.g. `npx ia-sincer claude pt`).
+> 💡 **English Version:** To install the English version, add `--lang en` or `en` to the command (e.g. `npx ia-sincer claude --lang en`).
 
 ---
 
 ### 💻 Via Curl / Bash
 ```bash
-# Interactive menu
-curl -fsSL https://raw.githubusercontent.com/inclitoleo/ia-sincer/main/install.sh | bash
-
-# Target-specific install
+# Default (Portuguese)
 curl -fsSL https://raw.githubusercontent.com/inclitoleo/ia-sincer/main/install.sh | bash -s -- claude
-curl -fsSL https://raw.githubusercontent.com/inclitoleo/ia-sincer/main/install.sh | bash -s -- gemini
-curl -fsSL https://raw.githubusercontent.com/inclitoleo/ia-sincer/main/install.sh | bash -s -- codex
+
+# English version
+curl -fsSL https://raw.githubusercontent.com/inclitoleo/ia-sincer/main/install.sh | bash -s -- claude --lang en
 ```
 
 ---
@@ -56,25 +54,25 @@ curl -fsSL https://raw.githubusercontent.com/inclitoleo/ia-sincer/main/install.s
 Append the skill instructions to your global or project `CLAUDE.md`:
 ```bash
 mkdir -p ~/.claude
-curl -fsSL https://raw.githubusercontent.com/inclitoleo/ia-sincer/main/en/SKILL.md >> ~/.claude/CLAUDE.md
+curl -fsSL https://raw.githubusercontent.com/inclitoleo/ia-sincer/main/pt_br/SKILL.md >> ~/.claude/CLAUDE.md
 ```
 
 ### 2. ♊ Google Antigravity / Gemini CLI (`agy`)
 Save the skill file to your global Antigravity skills directory:
 ```bash
 mkdir -p ~/.gemini/config/skills/ai-sincer
-curl -fsSL https://raw.githubusercontent.com/inclitoleo/ia-sincer/main/en/SKILL.md -o ~/.gemini/config/skills/ai-sincer/SKILL.md
+curl -fsSL https://raw.githubusercontent.com/inclitoleo/ia-sincer/main/pt_br/SKILL.md -o ~/.gemini/config/skills/ai-sincer/SKILL.md
 ```
 
 ### 3. 💻 OpenAI Codex / Custom System Prompts
 Append the skill instructions to your global Codex instructions file:
 ```bash
 mkdir -p ~/.codex
-curl -fsSL https://raw.githubusercontent.com/inclitoleo/ia-sincer/main/en/SKILL.md >> ~/.codex/instructions.md
+curl -fsSL https://raw.githubusercontent.com/inclitoleo/ia-sincer/main/pt_br/SKILL.md >> ~/.codex/instructions.md
 ```
 
 ### 4. 🐳 DeepSeek (Web UI, API, Open-WebUI, Ollama)
-Copy the content of [en/SKILL.md](en/SKILL.md) (or [pt_br/SKILL.md](pt_br/SKILL.md)) into your Custom Instructions or API `system` message parameter.
+Copy the content of [pt_br/SKILL.md](pt_br/SKILL.md) (or [en/SKILL.md](en/SKILL.md)) into your Custom Instructions or API `system` message parameter.
 
 ---
 
@@ -87,10 +85,10 @@ ia-sincer/
 ├── package.json      # Node CLI config
 ├── bin/
 │   └── cli.js        # Interactive Node CLI
-├── en/
-│   └── SKILL.md      # English Skill (Default)
-└── pt_br/
-    └── SKILL.md      # Portuguese Skill
+├── pt_br/
+│   └── SKILL.md      # Portuguese Skill (Default)
+└── en/
+    └── SKILL.md      # English Skill
 ```
 
 ---
