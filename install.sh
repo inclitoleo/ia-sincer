@@ -63,9 +63,14 @@ if [[ "$CUSTOM_TARGET" == "false" && -t 0 ]]; then
   echo -e "  ${BOLD}2)${NC} Apenas Claude Code"
   echo -e "  ${BOLD}3)${NC} Apenas Gemini / Google Antigravity (agy)"
   echo -e "  ${BOLD}4)${NC} Apenas OpenAI Codex / Cursor"
+  echo -e "  ${BOLD}5)${NC} Sair / Cancelar"
   echo ""
-  read -p "Digite a opção desejada [1-4] (padrão: 1): " OPTION
-  case $OPTION in
+  read -p "Digite a opção desejada [1-5] (padrão: 1): " OPTION
+  case $(echo "$OPTION" | tr '[:upper:]' '[:lower:]') in
+    5|s|q|sair|exit|cancelar)
+      echo -e "${YELLOW}Instalação cancelada pelo usuário.${NC}"
+      exit 0
+      ;;
     2) INSTALL_GEMINI=false; INSTALL_CLAUDE=true; INSTALL_CODEX=false ;;
     3) INSTALL_GEMINI=true; INSTALL_CLAUDE=false; INSTALL_CODEX=false ;;
     4) INSTALL_GEMINI=false; INSTALL_CLAUDE=false; INSTALL_CODEX=true ;;

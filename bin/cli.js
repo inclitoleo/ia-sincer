@@ -65,14 +65,22 @@ function promptSelection() {
     console.log(`  \x1b[1m2)\x1b[0m Apenas Claude Code`);
     console.log(`  \x1b[1m3)\x1b[0m Apenas Gemini / Google Antigravity (\`agy\`)`);
     console.log(`  \x1b[1m4)\x1b[0m Apenas OpenAI Codex / Cursor`);
+    console.log(`  \x1b[1m5)\x1b[0m Sair / Cancelar`);
 
-    rl.question(`\nDigite a opção desejada [1-4] (padrão: 1): `, (answer) => {
-      answer = answer.trim();
+    rl.question(`\nDigite a opção desejada [1-5] (padrão: 1): `, (answer) => {
+      answer = answer.trim().toLowerCase();
       rl.close();
-      if (answer === '2') resolve({ gemini: false, claude: true, codex: false });
-      else if (answer === '3') resolve({ gemini: true, claude: false, codex: false });
-      else if (answer === '4') resolve({ gemini: false, claude: false, codex: true });
-      else resolve({ gemini: true, claude: true, codex: true });
+      if (answer === '5' || answer === 's' || answer === 'q' || answer === 'sair' || answer === 'exit' || answer === 'cancelar') {
+        resolve(null); // Cancelled
+      } else if (answer === '2') {
+        resolve({ gemini: false, claude: true, codex: false });
+      } else if (answer === '3') {
+        resolve({ gemini: true, claude: false, codex: false });
+      } else if (answer === '4') {
+        resolve({ gemini: false, claude: false, codex: true });
+      } else {
+        resolve({ gemini: true, claude: true, codex: true });
+      }
     });
   });
 }
@@ -88,6 +96,11 @@ async function run() {
       else if (targetArg === 'all') targets = { gemini: true, claude: true, codex: true };
     } else if (process.stdin.isTTY) {
       targets = await promptSelection();
+    }
+
+    if (!targets) {
+      console.log(`\x1b[33mInstalação cancelada pelo usuário.\x1b[0m`);
+      process.exit(0);
     }
 
     console.log(`\n\x1b[34m\x1b[1m🚀 Instalando IA SINCER (${lang})...\x1b[0m`);
