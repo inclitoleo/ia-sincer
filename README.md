@@ -12,19 +12,19 @@ Available in:
 
 Run the interactive installer or specify your target AI directly in the command:
 
-### 🤖 Via NPX (Direct from GitHub)
+### 🤖 Via NPX (NPM Registry)
 ```bash
 # Interactive menu (Default: English)
-npx github:inclitoleo/ia-sincer
+npx ia-sincer
 
 # Install to a specific AI assistant
-npx github:inclitoleo/ia-sincer claude
-npx github:inclitoleo/ia-sincer gemini
-npx github:inclitoleo/ia-sincer codex
-npx github:inclitoleo/ia-sincer all
+npx ia-sincer claude
+npx ia-sincer gemini
+npx ia-sincer codex
+npx ia-sincer all
 ```
 
-> 💡 **Language Selection:** By default, the installer deploys the English version. To install the Portuguese version, add `pt` to the command (e.g. `npx github:inclitoleo/ia-sincer claude pt`).
+> 💡 **Language Selection:** By default, the installer deploys the English version. To install the Portuguese version, add `pt` to the command (e.g. `npx ia-sincer claude pt`).
 
 ---
 
