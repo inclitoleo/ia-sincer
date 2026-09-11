@@ -12,22 +12,22 @@ Available in:
 
 You can install `ia-sincer` across **Gemini/Antigravity**, **Claude Code**, and **OpenAI Codex** automatically with one command:
 
-### Option A: Via Curl / Bash
+### Option A: Via NPX (Direct from GitHub)
 ```bash
 # Português (Padrão)
+npx github:inclitoleo/ia-sincer
+
+# English
+npx github:inclitoleo/ia-sincer --en
+```
+
+### Option B: Via Curl / Bash
+```bash
+# Português
 curl -fsSL https://raw.githubusercontent.com/inclitoleo/ia-sincer/main/install.sh | bash
 
 # English
 curl -fsSL https://raw.githubusercontent.com/inclitoleo/ia-sincer/main/install.sh | bash -s -- --lang en
-```
-
-### Option B: Via NPX
-```bash
-# Português
-npx ia-sincer
-
-# English
-npx ia-sincer --en
 ```
 
 ---
@@ -136,6 +136,7 @@ ia-sincer/
 ├── README.md
 ├── install.sh        # Installer script (Bash)
 ├── package.json      # Node CLI config
+├── smithery.yaml     # Smithery.ai MCP configuration
 ├── bin/
 │   └── cli.js        # Installer CLI (NPX)
 ├── pt_br/
