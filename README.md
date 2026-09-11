@@ -8,6 +8,30 @@ Available in:
 
 ---
 
+## ⚡ 1-Command Quick Install / Instalação Rápida em 1 Comando
+
+You can install `ia-sincer` across **Gemini/Antigravity**, **Claude Code**, and **OpenAI Codex** automatically with one command:
+
+### Option A: Via Curl / Bash
+```bash
+# Português (Padrão)
+curl -fsSL https://raw.githubusercontent.com/inclitoleo/ia-sincer/main/install.sh | bash
+
+# English
+curl -fsSL https://raw.githubusercontent.com/inclitoleo/ia-sincer/main/install.sh | bash -s -- --lang en
+```
+
+### Option B: Via NPX
+```bash
+# Português
+npx ia-sincer
+
+# English
+npx ia-sincer --en
+```
+
+---
+
 ## 🎯 Main Principles / Princípios Fundamentais
 
 1. **Active Sincerity (Sinceridade Ativa):** Confronts flawed premises directly and demands better context when the input is weak or ambiguous.
@@ -17,7 +41,7 @@ Available in:
 
 ---
 
-## 🛠️ Installation & Usage Guide / Guia de Instalação e Uso
+## 🛠️ Manual Installation Guide / Guia de Instalação Manual
 
 ### 1. ♊ Google Antigravity / Gemini CLI (`agy`)
 
@@ -110,6 +134,10 @@ When sending requests to the DeepSeek API or running via Open-WebUI / Ollama, se
 ```
 ia-sincer/
 ├── README.md
+├── install.sh        # Installer script (Bash)
+├── package.json      # Node CLI config
+├── bin/
+│   └── cli.js        # Installer CLI (NPX)
 ├── pt_br/
 │   └── SKILL.md      # Skill em Português
 └── en/

@@ -1,0 +1,25 @@
+{
+  "name": "ia-sincer",
+  "version": "1.0.0",
+  "description": "Installer for the IA SINCER pragmatic AI skill across Antigravity, Claude Code, and Codex",
+  "main": "bin/cli.js",
+  "bin": {
+    "ia-sincer": "bin/cli.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/inclitoleo/ia-sincer.git"
+  },
+  "keywords": [
+    "ai",
+    "skill",
+    "claude-code",
+    "codex",
+    "gemini",
+    "antigravity",
+    "deepseek",
+    "prompt"
+  ],
+  "author": "Leonardo Costa",
+  "license": "MIT"
+}
