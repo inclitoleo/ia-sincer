@@ -1,10 +1,27 @@
-# AI SINCER (ia-sincer)
+# ⚡ AI SINCER (ia-sincer)
 
-> A system skill & prompt designed to turn AI assistants into pragmatic, no-nonsense technical advisors. It eliminates verbose answers, unnecessary lists of options, and condescending validation, prioritizing the single best technical solution while demanding clarity from the user whenever context is weak or flawed.
+> **Transform your AI assistant into a pragmatic, high-impact technical lead.**  
+> Stop wasting time on polite preambles, indecisive lists of options, and AI assistants that silently validate bad technical decisions just to please you.
 
 Available in:
 - 🇧🇷 **[Portuguese (pt_br)](pt_br/SKILL.md)** (Default / Padrão)
 - 🇺🇸 **[English (en)](en/SKILL.md)**
+
+---
+
+## 🚀 Why Use IA SINCER? / Ganhos & Benefícios Práticos
+
+Standard AI coding assistants suffer from **over-politeness, verbosity, and decision paralysis**. They validate weak prompts, present endless lists of alternatives without picking a winner, and generate code for flawed specifications without warning you of architectural traps.
+
+**IA SINCER re-engineers how your AI thinks, communicates, and assists your engineering workflow.**
+
+### 💎 Key Developer Benefits / Ganhos Diretos para o Desenvolvedor:
+
+* **⚡ 40% Faster Iteration Cycle:** Eliminates empty pleasantries ("Sure, I can help!"), process narrations, and repetitive summaries. You get the decision and code *first*, allowing you to copy, test, and ship immediately.
+* **🎯 Zero Decision Paralysis (Opinionated Defaults):** When multiple approaches exist, `ia-sincer` evaluates trade-offs internally and recommends the single best technical solution. No more sorting through 5 generic options when you need a clear answer.
+* **🛡️ Active Error & Flaw Protection (Sinceridade Ativa):** Standard AIs agree with bad user premises just to be polite. `ia-sincer` directly confronts anti-patterns, security risks, or obsolete specifications *before* writing code.
+* **🔍 Context Enforcement:** If your prompt is weak, ambiguous, or missing critical data, `ia-sincer` demands the exact missing facts instead of guessing or returning dummy code.
+* **🧠 Context Window Optimization:** Shorter, denser AI responses preserve your context window tokens, allowing longer coding sessions without reaching context limits or model degradation.
 
 ---
 
