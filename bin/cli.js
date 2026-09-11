@@ -7,15 +7,21 @@ const os = require('os');
 const readline = require('readline');
 
 const homeDir = os.homedir();
-const args = process.argv.slice(2);
+const args = process.argv.slice(2).map((a) => a.toLowerCase().trim());
 
 let lang = 'pt_br';
-if (args.includes('--en') || args.includes('--english')) {
+if (args.includes('en') || args.includes('english') || args.includes('--en') || args.includes('--english')) {
   lang = 'en';
 }
 
-// Check if specific target flag is provided
+// Support positional args or flags: 'gemini', 'claude', 'codex', 'all'
 let targetArg = null;
+if (args.includes('gemini') || args.includes('--gemini')) targetArg = 'gemini';
+if (args.includes('claude') || args.includes('--claude')) targetArg = 'claude';
+if (args.includes('codex') || args.includes('--codex')) targetArg = 'codex';
+if (args.includes('all') || args.includes('--all')) targetArg = 'all';
+
+// Support --target=... or --target ...
 const targetIdx = args.findIndex((a) => a === '--target' || a.startsWith('--target='));
 if (targetIdx !== -1) {
   if (args[targetIdx].includes('=')) {
@@ -24,12 +30,6 @@ if (targetIdx !== -1) {
     targetArg = args[targetIdx + 1];
   }
 }
-
-// Flags like --gemini, --claude, --codex
-if (args.includes('--gemini')) targetArg = 'gemini';
-if (args.includes('--claude')) targetArg = 'claude';
-if (args.includes('--codex')) targetArg = 'codex';
-if (args.includes('--all')) targetArg = 'all';
 
 const rawUrl = `https://raw.githubusercontent.com/inclitoleo/ia-sincer/main/${lang}/SKILL.md`;
 
@@ -62,39 +62,17 @@ function promptSelection() {
 
     console.log(`\x1b[36m\x1b[1m\nPara qual IA você deseja instalar a skill IA SINCER?\x1b[0m`);
     console.log(`  \x1b[1m1)\x1b[0m Todas (Gemini/Antigravity, Claude Code e Codex) [Padrão]`);
-    console.log(`  \x1b[1m2)\x1b[0m Apenas Gemini / Google Antigravity (\`agy\`)`);
-    console.log(`  \x1b[1m3)\x1b[0m Apenas Claude Code`);
+    console.log(`  \x1b[1m2)\x1b[0m Apenas Claude Code`);
+    console.log(`  \x1b[1m3)\x1b[0m Apenas Gemini / Google Antigravity (\`agy\`)`);
     console.log(`  \x1b[1m4)\x1b[0m Apenas OpenAI Codex / Cursor`);
-    console.log(`  \x1b[1m5)\x1b[0m Personalizar escolha`);
 
-    rl.question(`\nDigite a opção desejada [1-5] (padrão: 1): `, (answer) => {
+    rl.question(`\nDigite a opção desejada [1-4] (padrão: 1): `, (answer) => {
       answer = answer.trim();
-      if (answer === '2') {
-        rl.close();
-        resolve({ gemini: true, claude: false, codex: false });
-      } else if (answer === '3') {
-        rl.close();
-        resolve({ gemini: false, claude: true, codex: false });
-      } else if (answer === '4') {
-        rl.close();
-        resolve({ gemini: false, claude: false, codex: true });
-      } else if (answer === '5') {
-        rl.question(`  Deseja instalar no Gemini/Antigravity? [S/n]: `, (ansGem) => {
-          const gem = ansGem.trim().toLowerCase() !== 'n';
-          rl.question(`  Deseja instalar no Claude Code? [S/n]: `, (ansCla) => {
-            const cla = ansCla.trim().toLowerCase() !== 'n';
-            rl.question(`  Deseja instalar no Codex/Cursor? [S/n]: `, (ansCod) => {
-              const cod = ansCod.trim().toLowerCase() !== 'n';
-              rl.close();
-              resolve({ gemini: gem, claude: cla, codex: cod });
-            });
-          });
-        });
-      } else {
-        // Default to all
-        rl.close();
-        resolve({ gemini: true, claude: true, codex: true });
-      }
+      rl.close();
+      if (answer === '2') resolve({ gemini: false, claude: true, codex: false });
+      else if (answer === '3') resolve({ gemini: true, claude: false, codex: false });
+      else if (answer === '4') resolve({ gemini: false, claude: false, codex: true });
+      else resolve({ gemini: true, claude: true, codex: true });
     });
   });
 }

@@ -8,31 +8,45 @@ Available in:
 
 ---
 
-## ⚡ Instalação Rápida Interativa
+## ⚡ Instalação Rápida em 1 Comando
 
-Ao rodar o instalador sem flags, ele exibirá um **menu interativo no terminal** para você escolher em quais IAs deseja instalar:
+Você pode escolher a IA de destino diretamente no comando ou rodar sem parâmetros para usar o menu interativo:
 
-### Via NPX (Direct from GitHub)
+### 🤖 Via NPX (Direct from GitHub)
 ```bash
-# Menu interativo
-npx github:inclitoleo/ia-sincer
+# Para Claude Code
+npx github:inclitoleo/ia-sincer claude
 
-# Instalar em uma IA específica diretamente
-npx github:inclitoleo/ia-sincer --gemini
-npx github:inclitoleo/ia-sincer --claude
-npx github:inclitoleo/ia-sincer --codex
-npx github:inclitoleo/ia-sincer --all --en   # Em inglês
+# Para Gemini / Google Antigravity
+npx github:inclitoleo/ia-sincer gemini
+
+# Para OpenAI Codex / Cursor
+npx github:inclitoleo/ia-sincer codex
+
+# Para todas as IAs simultaneamente
+npx github:inclitoleo/ia-sincer all
+
+# Menu interativo no terminal
+npx github:inclitoleo/ia-sincer
 ```
 
-### Via Curl / Bash
+> 💡 **Dica de idioma:** Para instalar a versão em inglês, adicione `en` ao comando (ex: `npx github:inclitoleo/ia-sincer claude en`).
+
+---
+
+### 💻 Via Curl / Bash
 ```bash
+# Para Claude Code
+curl -fsSL https://raw.githubusercontent.com/inclitoleo/ia-sincer/main/install.sh | bash -s -- claude
+
+# Para Gemini
+curl -fsSL https://raw.githubusercontent.com/inclitoleo/ia-sincer/main/install.sh | bash -s -- gemini
+
+# Para Codex
+curl -fsSL https://raw.githubusercontent.com/inclitoleo/ia-sincer/main/install.sh | bash -s -- codex
+
 # Menu interativo
 curl -fsSL https://raw.githubusercontent.com/inclitoleo/ia-sincer/main/install.sh | bash
-
-# Instalar em uma IA específica diretamente
-curl -fsSL https://raw.githubusercontent.com/inclitoleo/ia-sincer/main/install.sh | bash -s -- --gemini
-curl -fsSL https://raw.githubusercontent.com/inclitoleo/ia-sincer/main/install.sh | bash -s -- --claude
-curl -fsSL https://raw.githubusercontent.com/inclitoleo/ia-sincer/main/install.sh | bash -s -- --codex
 ```
 
 ---
@@ -48,24 +62,19 @@ curl -fsSL https://raw.githubusercontent.com/inclitoleo/ia-sincer/main/install.s
 
 ## 🛠️ Manual Installation Guide / Guia de Instalação Manual
 
-### 1. ♊ Google Antigravity / Gemini CLI (`agy`)
-
-Antigravity automatically discovers skills in `~/.gemini/config/skills/` (global) or `.agents/skills/` (project-specific).
-
-```bash
-mkdir -p ~/.gemini/config/skills/ai-sincer
-curl -fsSL https://raw.githubusercontent.com/inclitoleo/ia-sincer/main/pt_br/SKILL.md -o ~/.gemini/config/skills/ai-sincer/SKILL.md
-```
-
-### 2. 🤖 Claude Code (Anthropic CLI)
-
+### 1. 🤖 Claude Code (Anthropic CLI)
 ```bash
 mkdir -p ~/.claude
 curl -fsSL https://raw.githubusercontent.com/inclitoleo/ia-sincer/main/pt_br/SKILL.md >> ~/.claude/CLAUDE.md
 ```
 
-### 3. 💻 OpenAI Codex / Custom System Prompts
+### 2. ♊ Google Antigravity / Gemini CLI (`agy`)
+```bash
+mkdir -p ~/.gemini/config/skills/ai-sincer
+curl -fsSL https://raw.githubusercontent.com/inclitoleo/ia-sincer/main/pt_br/SKILL.md -o ~/.gemini/config/skills/ai-sincer/SKILL.md
+```
 
+### 3. 💻 OpenAI Codex / Custom System Prompts
 ```bash
 mkdir -p ~/.codex
 curl -fsSL https://raw.githubusercontent.com/inclitoleo/ia-sincer/main/pt_br/SKILL.md >> ~/.codex/instructions.md
