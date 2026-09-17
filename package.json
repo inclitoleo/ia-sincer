@@ -1,6 +1,6 @@
 {
   "name": "ia-sincer",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Installer for the IA SINCER pragmatic AI skill across Antigravity, Claude Code, and Codex",
   "main": "bin/cli.js",
   "bin": {
