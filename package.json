@@ -6,6 +6,9 @@
   "bin": {
     "ia-sincer": "bin/cli.js"
   },
+  "scripts": {
+    "test": "node --check bin/cli.js && node bin/cli.js all --lang en"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/inclitoleo/ia-sincer.git"
