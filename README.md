@@ -38,7 +38,7 @@ Standard AI coding assistants suffer from **over-politeness, verbosity, and deci
 
 `ia-sincer` provides a zero-dependency installer compatible with **NPX**, **Node**, and **Bash/Curl**.
 
-By default, the installer deploys the **Portuguese (`pt_br`)** version. You can explicitly request the **English (`en`)** version using `--lang en` or the `en` keyword.
+By default, the installer deploys the **English (`en`)** version. You can explicitly request the **Portuguese (`pt_br`)** version using `--lang pt_br` or the `pt_br` keyword.
 
 ### 🤖 Via NPX (Recommended)
 

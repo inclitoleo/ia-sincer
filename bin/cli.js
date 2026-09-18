@@ -5,35 +5,41 @@ const path = require('path');
 const https = require('https');
 const os = require('os');
 const readline = require('readline');
+const pkg = require('../package.json');
 
 const homeDir = os.homedir();
 const args = process.argv.slice(2).map((a) => a.toLowerCase().trim());
 
-// Language resolution: default to 'pt_br', switch to 'en' if requested
-let lang = 'pt_br';
+if (args.includes('--version') || args.includes('-v')) {
+  console.log(pkg.version);
+  process.exit(0);
+}
+
+// Language resolution: default to 'en', switch to 'pt_br' if requested
+let lang = 'en';
 let langSetExplicitly = false;
 
-// Check for --lang en, --lang=en, or positional en/english/--en/--english
+// Check for --lang pt_br, --lang=pt_br, or positional pt/pt_br/portuguese/--pt/--pt_br
 const langIdx = args.findIndex((a) => a === '--lang' || a.startsWith('--lang='));
 if (langIdx !== -1) {
   if (args[langIdx].includes('=')) {
     const val = args[langIdx].split('=')[1];
-    if (val === 'en' || val === 'english') lang = 'en';
-    else lang = 'pt_br';
+    if (val === 'pt' || val === 'pt_br' || val === 'portuguese') lang = 'pt_br';
+    else lang = 'en';
   } else if (args[langIdx + 1]) {
     const val = args[langIdx + 1];
-    if (val === 'en' || val === 'english') lang = 'en';
-    else lang = 'pt_br';
+    if (val === 'pt' || val === 'pt_br' || val === 'portuguese') lang = 'pt_br';
+    else lang = 'en';
   }
   langSetExplicitly = true;
 }
 
-if (args.includes('en') || args.includes('english') || args.includes('--en') || args.includes('--english')) {
-  lang = 'en';
-  langSetExplicitly = true;
-}
 if (args.includes('pt') || args.includes('pt_br') || args.includes('portuguese') || args.includes('--pt') || args.includes('--pt_br')) {
   lang = 'pt_br';
+  langSetExplicitly = true;
+}
+if (args.includes('en') || args.includes('english') || args.includes('--en') || args.includes('--english')) {
+  lang = 'en';
   langSetExplicitly = true;
 }
 
@@ -80,14 +86,14 @@ function promptInteractive() {
       output: process.stdout,
     });
 
-    console.log(`\x1b[36m\x1b[1m\nPara qual IA você deseja instalar a skill IA SINCER?\x1b[0m`);
-    console.log(`  \x1b[1m1)\x1b[0m Todas (Claude Code, Gemini e Codex) [Padrão]`);
-    console.log(`  \x1b[1m2)\x1b[0m Apenas Claude Code`);
-    console.log(`  \x1b[1m3)\x1b[0m Apenas Gemini / Google Antigravity (\`agy\`)`);
-    console.log(`  \x1b[1m4)\x1b[0m Apenas OpenAI Codex / Cursor`);
-    console.log(`  \x1b[1m5)\x1b[0m Sair / Cancelar`);
+    console.log(`\x1b[36m\x1b[1m\nWhich AI do you want to install the IA SINCER skill for?\x1b[0m`);
+    console.log(`  \x1b[1m1)\x1b[0m All (Claude Code, Gemini, and Codex) [Default]`);
+    console.log(`  \x1b[1m2)\x1b[0m Claude Code only`);
+    console.log(`  \x1b[1m3)\x1b[0m Gemini / Google Antigravity (\`agy\`) only`);
+    console.log(`  \x1b[1m4)\x1b[0m OpenAI Codex / Cursor only`);
+    console.log(`  \x1b[1m5)\x1b[0m Exit / Cancel`);
 
-    rl.question(`\nDigite a opção desejada [1-5] (padrão: 1): `, (answer) => {
+    rl.question(`\nEnter choice [1-5] (default: 1): `, (answer) => {
       answer = answer.trim().toLowerCase();
       if (answer === '5' || answer === 's' || answer === 'q' || answer === 'exit' || answer === 'sair' || answer === 'cancel') {
         rl.close();
@@ -100,13 +106,13 @@ function promptInteractive() {
       else if (answer === '4') targets = { gemini: false, claude: false, codex: true };
 
       if (!langSetExplicitly) {
-        console.log(`\nIdioma da Skill / Skill Language:`);
-        console.log(`  \x1b[1m1)\x1b[0m Português (Brasil) [Padrão]`);
-        console.log(`  \x1b[1m2)\x1b[0m English`);
-        rl.question(`Escolha o idioma / Choose language [1-2] (padrão: 1): `, (langAns) => {
+        console.log(`\nSkill Language:`);
+        console.log(`  \x1b[1m1)\x1b[0m English [Default]`);
+        console.log(`  \x1b[1m2)\x1b[0m Português (Brasil)`);
+        rl.question(`Choose language [1-2] (default: 1): `, (langAns) => {
           langAns = langAns.trim();
           rl.close();
-          const selectedLang = langAns === '2' ? 'en' : 'pt_br';
+          const selectedLang = langAns === '2' ? 'pt_br' : 'en';
           resolve({ targets, selectedLang });
         });
       } else {
@@ -134,12 +140,12 @@ async function run() {
     }
 
     if (!targets) {
-      console.log(`\x1b[33mInstalação cancelada pelo usuário.\x1b[0m`);
+      console.log(`\x1b[33mInstallation cancelled by user.\x1b[0m`);
       process.exit(0);
     }
 
     const rawUrl = `https://raw.githubusercontent.com/inclitoleo/ia-sincer/main/${selectedLang}/SKILL.md`;
-    console.log(`\n\x1b[34m\x1b[1m🚀 Instalando IA SINCER (${selectedLang})...\x1b[0m`);
+    console.log(`\n\x1b[34m\x1b[1m🚀 Installing IA SINCER (${selectedLang})...\x1b[0m`);
     const content = await fetchSkill(rawUrl, selectedLang);
     let installed = 0;
 
@@ -151,9 +157,9 @@ async function run() {
       let claudeExisting = fs.existsSync(claudeFile) ? fs.readFileSync(claudeFile, 'utf8') : '';
       if (!claudeExisting.includes('AI SINCER')) {
         fs.appendFileSync(claudeFile, `\n\n# AI SINCER SKILL\n\n${content}`, 'utf8');
-        console.log(`  \x1b[32m✓\x1b[0m Adicionado às instruções globais do Claude Code: \x1b[1m${claudeFile}\x1b[0m`);
+        console.log(`  \x1b[32m✓\x1b[0m Added to Claude Code global instructions: \x1b[1m${claudeFile}\x1b[0m`);
       } else {
-        console.log(`  \x1b[33mℹ\x1b[0m Instruções do Claude Code já contêm a skill IA SINCER.`);
+        console.log(`  \x1b[33mℹ\x1b[0m Claude Code instructions already contain the IA SINCER skill.`);
       }
       installed++;
     }
@@ -163,7 +169,7 @@ async function run() {
       const geminiDir = path.join(homeDir, '.gemini', 'config', 'skills', 'ai-sincer');
       fs.mkdirSync(geminiDir, { recursive: true });
       fs.writeFileSync(path.join(geminiDir, 'SKILL.md'), content, 'utf8');
-      console.log(`  \x1b[32m✓\x1b[0m Instalado em Gemini/Antigravity: \x1b[1m${path.join(geminiDir, 'SKILL.md')}\x1b[0m`);
+      console.log(`  \x1b[32m✓\x1b[0m Installed in Gemini/Antigravity: \x1b[1m${path.join(geminiDir, 'SKILL.md')}\x1b[0m`);
       installed++;
     }
 
@@ -175,20 +181,20 @@ async function run() {
       let codexExisting = fs.existsSync(codexFile) ? fs.readFileSync(codexFile, 'utf8') : '';
       if (!codexExisting.includes('AI SINCER')) {
         fs.appendFileSync(codexFile, `\n\n# AI SINCER SKILL\n\n${content}`, 'utf8');
-        console.log(`  \x1b[32m✓\x1b[0m Adicionado às instruções globais do Codex: \x1b[1m${codexFile}\x1b[0m`);
+        console.log(`  \x1b[32m✓\x1b[0m Added to Codex global instructions: \x1b[1m${codexFile}\x1b[0m`);
       } else {
-        console.log(`  \x1b[33mℹ\x1b[0m Instruções do Codex já contêm a skill IA SINCER.`);
+        console.log(`  \x1b[33mℹ\x1b[0m Codex instructions already contain the IA SINCER skill.`);
       }
       installed++;
     }
 
     if (installed === 0) {
-      console.log(`\n\x1b[33mNenhum destino foi selecionado para instalação.\x1b[0m`);
+      console.log(`\n\x1b[33mNo target selected for installation.\x1b[0m`);
     } else {
-      console.log(`\n\x1b[32m\x1b[1m✨ Instalação concluída! (${installed} IA(s) configurada(s))\x1b[0m`);
+      console.log(`\n\x1b[32m\x1b[1m✨ Installation complete! (${installed} AI(s) configured)\x1b[0m`);
     }
   } catch (err) {
-    console.error(`\x1b[31mErro durante a instalação:\x1b[0m`, err.message);
+    console.error(`\x1b[31mError during installation:\x1b[0m`, err.message);
     process.exit(1);
   }
 }
