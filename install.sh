@@ -15,7 +15,7 @@ CYAN='\033[0;36m'
 BOLD='\033[1m'
 NC='\033[0m'
 
-LANG_CHOICE="pt_br"
+LANG_CHOICE="en"
 LANG_SET_EXPLICITLY=false
 INSTALL_GEMINI=true
 INSTALL_CLAUDE=true
@@ -61,17 +61,17 @@ done
 
 # Interactive menu if running in TTY without target args
 if [[ "$CUSTOM_TARGET" == "false" && -t 0 ]]; then
-  echo -e "${CYAN}${BOLD}\nPara qual IA você deseja instalar a skill IA SINCER?${NC}"
-  echo -e "  ${BOLD}1)${NC} Todas (Claude Code, Gemini e Codex) [Padrão]"
-  echo -e "  ${BOLD}2)${NC} Apenas Claude Code"
-  echo -e "  ${BOLD}3)${NC} Apenas Gemini / Google Antigravity (agy)"
-  echo -e "  ${BOLD}4)${NC} Apenas OpenAI Codex / Cursor"
-  echo -e "  ${BOLD}5)${NC} Sair / Cancelar"
+  echo -e "${CYAN}${BOLD}\nWhich AI do you want to install the IA SINCER skill for?${NC}"
+  echo -e "  ${BOLD}1)${NC} All (Claude Code, Gemini, and Codex) [Default]"
+  echo -e "  ${BOLD}2)${NC} Claude Code only"
+  echo -e "  ${BOLD}3)${NC} Gemini / Google Antigravity (agy) only"
+  echo -e "  ${BOLD}4)${NC} OpenAI Codex / Cursor only"
+  echo -e "  ${BOLD}5)${NC} Exit / Cancel"
   echo ""
-  read -p "Digite a opção desejada [1-5] (padrão: 1): " OPTION
+  read -p "Enter choice [1-5] (default: 1): " OPTION
   case $(echo "$OPTION" | tr '[:upper:]' '[:lower:]') in
     5|s|q|exit|sair|cancel|cancelar)
-      echo -e "${YELLOW}Instalação cancelada pelo usuário.${NC}"
+      echo -e "${YELLOW}Installation cancelled by user.${NC}"
       exit 0
       ;;
     2) INSTALL_GEMINI=false; INSTALL_CLAUDE=true; INSTALL_CODEX=false ;;
@@ -81,14 +81,14 @@ if [[ "$CUSTOM_TARGET" == "false" && -t 0 ]]; then
   esac
 
   if [[ "$LANG_SET_EXPLICITLY" == "false" ]]; then
-    echo -e "\nIdioma da Skill / Skill Language:"
-    echo -e "  ${BOLD}1)${NC} Português (Brasil) [Padrão]"
-    echo -e "  ${BOLD}2)${NC} English"
-    read -p "Escolha o idioma / Choose language [1-2] (padrão: 1): " LANG_OPT
+    echo -e "\nSkill Language:"
+    echo -e "  ${BOLD}1)${NC} English [Default]"
+    echo -e "  ${BOLD}2)${NC} Português (Brasil)"
+    read -p "Choose language [1-2] (default: 1): " LANG_OPT
     if [[ "$LANG_OPT" == "2" ]]; then
-      LANG_CHOICE="en"
-    else
       LANG_CHOICE="pt_br"
+    else
+      LANG_CHOICE="en"
     fi
   fi
 fi
@@ -96,7 +96,7 @@ fi
 REPO_RAW_URL="https://raw.githubusercontent.com/inclitoleo/ia-sincer/main"
 SKILL_URL="${REPO_RAW_URL}/${LANG_CHOICE}/SKILL.md"
 
-echo -e "\n${BLUE}${BOLD}🚀 Instalando IA SINCER (${LANG_CHOICE})...${NC}"
+echo -e "\n${BLUE}${BOLD}🚀 Installing IA SINCER (${LANG_CHOICE})...${NC}"
 
 # Fetch skill content into temporary file
 TMP_FILE=$(mktemp)
@@ -126,9 +126,9 @@ if [[ "$INSTALL_CLAUDE" == "true" ]]; then
   if [ ! -f "$CLAUDE_FILE" ] || ! grep -q "AI SINCER" "$CLAUDE_FILE"; then
     echo -e "\n# AI SINCER SKILL\n" >> "$CLAUDE_FILE"
     cat "$TMP_FILE" >> "$CLAUDE_FILE"
-    echo -e "  ${GREEN}✓${NC} Adicionado às instruções globais do Claude Code: ${BOLD}$CLAUDE_FILE${NC}"
+    echo -e "  ${GREEN}✓${NC} Added to Claude Code global instructions: ${BOLD}$CLAUDE_FILE${NC}"
   else
-    echo -e "  ${YELLOW}ℹ${NC} Instruções do Claude Code já contêm a skill IA SINCER."
+    echo -e "  ${YELLOW}ℹ${NC} Claude Code instructions already contain the IA SINCER skill."
   fi
   INSTALLED_COUNT=$((INSTALLED_COUNT + 1))
 fi
@@ -138,7 +138,7 @@ if [[ "$INSTALL_GEMINI" == "true" ]]; then
   GEMINI_DIR="$HOME/.gemini/config/skills/ai-sincer"
   mkdir -p "$GEMINI_DIR"
   cp "$TMP_FILE" "$GEMINI_DIR/SKILL.md"
-  echo -e "  ${GREEN}✓${NC} Instalado em Gemini/Antigravity: ${BOLD}$GEMINI_DIR/SKILL.md${NC}"
+  echo -e "  ${GREEN}✓${NC} Installed in Gemini/Antigravity: ${BOLD}$GEMINI_DIR/SKILL.md${NC}"
   INSTALLED_COUNT=$((INSTALLED_COUNT + 1))
 fi
 
@@ -151,12 +151,12 @@ if [[ "$INSTALL_CODEX" == "true" ]]; then
   if [ ! -f "$CODEX_FILE" ] || ! grep -q "AI SINCER" "$CODEX_FILE"; then
     echo -e "\n# AI SINCER SKILL\n" >> "$CODEX_FILE"
     cat "$TMP_FILE" >> "$CODEX_FILE"
-    echo -e "  ${GREEN}✓${NC} Adicionado às instruções globais do Codex: ${BOLD}$CODEX_FILE${NC}"
+    echo -e "  ${GREEN}✓${NC} Added to Codex global instructions: ${BOLD}$CODEX_FILE${NC}"
   else
-    echo -e "  ${YELLOW}ℹ${NC} Instruções do Codex já contêm a skill IA SINCER."
+    echo -e "  ${YELLOW}ℹ${NC} Codex instructions already contain the IA SINCER skill."
   fi
   INSTALLED_COUNT=$((INSTALLED_COUNT + 1))
 fi
 
 echo ""
-echo -e "${GREEN}${BOLD}✨ Instalação concluída! (${INSTALLED_COUNT} IA(s) configurada(s))${NC}"
+echo -e "${GREEN}${BOLD}✨ Installation complete! (${INSTALLED_COUNT} AI(s) configured)${NC}"
