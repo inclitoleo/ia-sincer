@@ -1,0 +1,62 @@
+[
+  {
+    "cteId": "CTE-1001",
+    "customerId": "acme-sp",
+    "service": "standard",
+    "actualKg": 80,
+    "lengthCm": 120,
+    "widthCm": 80,
+    "heightCm": 100,
+    "km": 430,
+    "declaredValueCents": 800000,
+    "actualHours": 80
+  },
+  {
+    "cteId": "CTE-1002",
+    "customerId": "beta-mg",
+    "service": "express",
+    "actualKg": 5,
+    "lengthCm": 50,
+    "widthCm": 40,
+    "heightCm": 40,
+    "km": 50,
+    "declaredValueCents": 50000,
+    "actualHours": 20
+  },
+  {
+    "cteId": "CTE-1003",
+    "customerId": "gama-pr",
+    "service": "standard",
+    "actualKg": 200,
+    "lengthCm": 100,
+    "widthCm": 50,
+    "heightCm": 40,
+    "km": 900,
+    "declaredValueCents": 2500000,
+    "actualHours": 144
+  },
+  {
+    "cteId": "CTE-1004",
+    "customerId": "delta-rs",
+    "service": "standard",
+    "actualKg": 40,
+    "lengthCm": 40,
+    "widthCm": 40,
+    "heightCm": 60,
+    "km": 200,
+    "declaredValueCents": 0,
+    "actualHours": 200
+  },
+  {
+    "cteId": "CTE-1005",
+    "customerId": "epsilon-ba",
+    "service": "express",
+    "actualKg": 10,
+    "lengthCm": 200,
+    "widthCm": 40,
+    "heightCm": 60,
+    "km": 15,
+    "declaredValueCents": 12000000,
+    "actualHours": 50
+  }
+]

@@ -17,18 +17,32 @@ Standard AI coding assistants suffer from **over-politeness, verbosity, and deci
 
 ### 💎 Key Developer Benefits:
 
-* **⚡ 40% Faster Iteration Cycle:** Eliminates empty pleasantries ("Sure, I can help!"), process narrations, and repetitive summaries. You get the decision and code *first*, allowing you to copy, test, and ship immediately.
-* **🎯 Zero Decision Paralysis (Opinionated Defaults):** When multiple approaches exist, `ia-sincer` evaluates trade-offs internally and recommends the single best technical solution. No more sorting through 5 generic options when you need a clear answer.
+* **⚡ Faster Iteration:** Eliminates empty pleasantries ("Sure, I can help!"), process narration, and repetitive summaries. You get the decision and code first.
+* **🎯 Decision-First Defaults:** When objective criteria support a winner, `ia-sincer` recommends it first instead of presenting artificial ties. Value judgments remain with the user.
 * **🛡️ Active Error & Flaw Protection:** Standard AIs agree with bad user premises just to be polite. `ia-sincer` directly confronts anti-patterns, security risks, or obsolete specifications *before* writing code.
-* **🔍 Context Enforcement:** If your prompt is weak, ambiguous, or missing critical data, `ia-sincer` demands the exact missing facts instead of guessing or returning dummy code.
+* **🔍 Context Discipline:** The skill asks for missing facts only when they can materially change the action, risk, or artifact; otherwise it states a reasonable assumption and proceeds.
 * **🧠 Context Window Optimization:** Shorter, denser AI responses preserve your context window tokens, allowing longer coding sessions without reaching context limits or model degradation.
+* **⚡ Optional RTK Integration:** The installer can detect and optionally install [RTK](https://github.com/rtk-ai/rtk) to filter noisy output from supported CLI commands.
+
+---
+
+## ⚡ RTK (Rust Token Killer) + IA SINCER Synergy
+
+IA SINCER optimizes the **prompt & model response layer**, eliminating preambles and indecision.
+[RTK](https://github.com/rtk-ai/rtk) optimizes the **command execution layer**, filtering noisy terminal outputs.
+
+They address different sources of context usage: IA SINCER keeps decisions and responses focused, while RTK can reduce noisy output from supported shell commands. Actual savings depend on the model, task, tools, and conversation length.
+
+During installation, `ia-sincer` automatically checks for `rtk` in your system PATH and offers 1-click installation if missing.
+- Pass `--install-rtk` to force automatic RTK installation.
+- Pass `--skip-rtk` or `--no-rtk` to skip the RTK check.
 
 ---
 
 ## 🎯 Core Principles
 
 1. **Active Sincerity:** Confronts flawed user premises directly and demands better context when input is weak or ambiguous instead of guessing or giving superficial answers.
-2. **Opinionated Default:** Always recommends and executes the single best technical solution instead of dumping endless options or declaring artificial ties.
+2. **Opinionated Default:** Recommends the best supported technical solution instead of dumping irrelevant options or declaring artificial ties; it does not force a winner for genuine value judgments.
 3. **No Flattery or Filler:** Zero preambles ("Great question!"), no performative apologies, no emojis, and no unsolicited option lists.
 4. **Factual Rigor:** Distinguishes verified facts from inferences and unverified points.
 

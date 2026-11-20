@@ -22,6 +22,9 @@ INSTALL_CLAUDE=true
 INSTALL_CODEX=true
 CUSTOM_TARGET=false
 
+SKIP_RTK=false
+FORCE_INSTALL_RTK=false
+
 # Parse positional arguments or flags
 for arg in "$@"; do
   case $(echo "$arg" | tr '[:upper:]' '[:lower:]') in
@@ -45,19 +48,44 @@ for arg in "$@"; do
       LANG_CHOICE="pt_br"
       LANG_SET_EXPLICITLY=true
       ;;
+    --skip-rtk|--no-rtk)
+      SKIP_RTK=true
+      ;;
+    --install-rtk)
+      FORCE_INSTALL_RTK=true
+      ;;
     --help|-h)
       echo -e "${BOLD}IA SINCER Installer${NC}"
-      echo "Usage: npx ia-sincer [claude|gemini|codex|all] [--lang en]"
+      echo "Usage: ./install.sh [claude|gemini|codex|all] [--lang en] [--skip-rtk] [--install-rtk]"
       echo ""
       echo "Examples:"
-      echo "  npx ia-sincer claude"
-      echo "  npx ia-sincer gemini --lang en"
-      echo "  npx ia-sincer codex"
-      echo "  npx ia-sincer all en"
+      echo "  ./install.sh claude"
+      echo "  ./install.sh gemini --lang en"
+      echo "  ./install.sh all --install-rtk"
       exit 0
       ;;
   esac
 done
+
+check_rtk() {
+  if command -v rtk >/dev/null 2>&1; then
+    RTK_VER=$(rtk --version 2>/dev/null || echo "installed")
+    echo -e "  ${GREEN}✓${NC} RTK detected: ${BOLD}${RTK_VER}${NC} (CLI Token Saver Active)"
+    return 0
+  else
+    return 1
+  fi
+}
+
+install_rtk() {
+  echo -e "\n${BLUE}${BOLD}⚡ Installing RTK (Rust Token Killer)...${NC}"
+  if curl -fsSL https://raw.githubusercontent.com/rtk-ai/rtk/main/install.sh | sh; then
+    echo -e "  ${GREEN}✓${NC} RTK installed successfully!\n"
+  else
+    echo -e "  ${YELLOW}ℹ${NC} Failed to install RTK automatically. You can install manually: curl -fsSL https://raw.githubusercontent.com/rtk-ai/rtk/main/install.sh | sh\n"
+  fi
+}
+
 
 # Interactive menu if running in TTY without target args
 if [[ "$CUSTOM_TARGET" == "false" && -t 0 ]]; then
@@ -89,6 +117,26 @@ if [[ "$CUSTOM_TARGET" == "false" && -t 0 ]]; then
       LANG_CHOICE="pt_br"
     else
       LANG_CHOICE="en"
+    fi
+  fi
+fi
+
+# RTK Dependency Check & Setup
+if [[ "$SKIP_RTK" == "false" ]]; then
+  if ! check_rtk; then
+    if [[ "$FORCE_INSTALL_RTK" == "true" ]]; then
+      install_rtk
+    elif [[ -t 0 ]]; then
+      echo -e "${YELLOW}${BOLD}\n⚡ RTK (Rust Token Killer) is recommended for 60-90% token savings on CLI operations.${NC}"
+      read -p "Would you like to install RTK now? [Y/n]: " RTK_ANS
+      RTK_ANS_LOWER=$(echo "$RTK_ANS" | tr '[:upper:]' '[:lower:]')
+      if [[ "$RTK_ANS_LOWER" == "" || "$RTK_ANS_LOWER" == "y" || "$RTK_ANS_LOWER" == "yes" || "$RTK_ANS_LOWER" == "s" || "$RTK_ANS_LOWER" == "sim" ]]; then
+        install_rtk
+      else
+        echo -e "  ${YELLOW}ℹ${NC} Continuing without RTK. (Token savings will rely on prompt rules only)"
+      fi
+    else
+      echo -e "  ${YELLOW}ℹ${NC} RTK not found. Install RTK for 60-90% CLI token savings: ${CYAN}curl -fsSL https://raw.githubusercontent.com/rtk-ai/rtk/main/install.sh | sh${NC}"
     fi
   fi
 fi

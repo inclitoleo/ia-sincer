@@ -1,0 +1,71 @@
+{
+  "period": "2026-08",
+  "uniqueCteCount": 5,
+  "invoices": [
+    {
+      "cteId": "CTE-1001",
+      "customerId": "acme-sp",
+      "billableKg": 160,
+      "freightCents": 18760,
+      "fuelCents": 1501,
+      "adValoremCents": 2400,
+      "taxType": "ICMS",
+      "taxCents": 2719,
+      "delayDays": 0,
+      "slaCreditCents": 0,
+      "totalCents": 25380
+    },
+    {
+      "cteId": "CTE-1002",
+      "customerId": "beta-mg",
+      "billableKg": 14,
+      "freightCents": 4500,
+      "fuelCents": 360,
+      "adValoremCents": 150,
+      "taxType": "ICMS",
+      "taxCents": 601,
+      "delayDays": 0,
+      "slaCreditCents": 0,
+      "totalCents": 5611
+    },
+    {
+      "cteId": "CTE-1003",
+      "customerId": "gama-pr",
+      "billableKg": 200,
+      "freightCents": 27800,
+      "fuelCents": 2224,
+      "adValoremCents": 7500,
+      "taxType": "ICMS",
+      "taxCents": 4503,
+      "delayDays": 3,
+      "slaCreditCents": 4170,
+      "totalCents": 37857
+    },
+    {
+      "cteId": "CTE-1004",
+      "customerId": "delta-rs",
+      "billableKg": 40,
+      "freightCents": 5800,
+      "fuelCents": 464,
+      "adValoremCents": 0,
+      "taxType": "ICMS",
+      "taxCents": 752,
+      "delayDays": 5,
+      "slaCreditCents": 1450,
+      "totalCents": 5566
+    },
+    {
+      "cteId": "CTE-1005",
+      "customerId": "epsilon-ba",
+      "billableKg": 80,
+      "freightCents": 6980,
+      "fuelCents": 558,
+      "adValoremCents": 36000,
+      "taxType": "ICMS",
+      "taxCents": 5225,
+      "delayDays": 1,
+      "slaCreditCents": 349,
+      "totalCents": 48414
+    }
+  ]
+}

@@ -1,13 +1,22 @@
 {
   "name": "ia-sincer",
-  "version": "1.0.2",
-  "description": "Installer for the IA SINCER pragmatic AI skill across Antigravity, Claude Code, and Codex",
+  "version": "1.1.0",
+  "description": "Installer for the IA SINCER pragmatic AI skill integrated with RTK token killer across Antigravity, Claude Code, and Codex",
   "main": "bin/cli.js",
   "bin": {
     "ia-sincer": "bin/cli.js"
   },
+  "files": [
+    "bin/",
+    "en/",
+    "pt_br/",
+    "scripts/validate-skills.js",
+    "install.sh",
+    "CHANGELOG.md"
+  ],
   "scripts": {
-    "test": "node --check bin/cli.js && node bin/cli.js all --lang en"
+    "test": "node --check bin/cli.js && node scripts/validate-skills.js && node bin/cli.js all --lang en --skip-rtk",
+    "prepublishOnly": "node --check bin/cli.js && node scripts/validate-skills.js"
   },
   "repository": {
     "type": "git",
@@ -16,6 +25,9 @@
   "keywords": [
     "ai",
     "skill",
+    "rtk",
+    "token-killer",
+    "token-optimization",
     "claude-code",
     "codex",
     "gemini",

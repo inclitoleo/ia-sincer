@@ -1,0 +1,90 @@
+{
+  "period": "2026-08",
+  "uniqueCteCount": 6,
+  "invoices": [
+    {
+      "cteId": "CTE-1001",
+      "customerId": "acme-sp",
+      "billableKg": 80,
+      "freightCents": 11960,
+      "fuelCents": 956.8,
+      "adValoremCents": 2400,
+      "taxType": "ISS",
+      "taxCents": 210.656,
+      "delayDays": 8,
+      "slaCreditCents": 4784,
+      "totalCents": 10743.456,
+      "eventId": "evt_01"
+    },
+    {
+      "cteId": "CTE-1002",
+      "customerId": "beta-mg",
+      "billableKg": 5,
+      "freightCents": 1025,
+      "fuelCents": 82,
+      "adValoremCents": 150,
+      "taxType": "ISS",
+      "taxCents": 25.14,
+      "delayDays": 0,
+      "slaCreditCents": 0,
+      "totalCents": 4500,
+      "eventId": "evt_02"
+    },
+    {
+      "cteId": "CTE-1003",
+      "customerId": "gama-pr",
+      "billableKg": 200,
+      "freightCents": 27800,
+      "fuelCents": 2224,
+      "adValoremCents": 7500,
+      "taxType": "ISS",
+      "taxCents": -583.9200000000001,
+      "delayDays": 48,
+      "slaCreditCents": 66720,
+      "totalCents": 4500,
+      "eventId": "evt_03"
+    },
+    {
+      "cteId": "CTE-1001",
+      "customerId": "acme-sp",
+      "billableKg": 80,
+      "freightCents": 11960,
+      "fuelCents": 956.8,
+      "adValoremCents": 2400,
+      "taxType": "ISS",
+      "taxCents": 210.656,
+      "delayDays": 8,
+      "slaCreditCents": 4784,
+      "totalCents": 10743.456,
+      "eventId": "evt_04"
+    },
+    {
+      "cteId": "CTE-1004",
+      "customerId": "delta-rs",
+      "billableKg": 40,
+      "freightCents": 5800,
+      "fuelCents": 463.99999999999994,
+      "adValoremCents": 0,
+      "taxType": "ISS",
+      "taxCents": -617.12,
+      "delayDays": 128,
+      "slaCreditCents": 37120,
+      "totalCents": 4500,
+      "eventId": "evt_05"
+    },
+    {
+      "cteId": "CTE-1005",
+      "customerId": "epsilon-ba",
+      "billableKg": 10,
+      "freightCents": 1030,
+      "fuelCents": 82.4,
+      "adValoremCents": 36000,
+      "taxType": "ISS",
+      "taxCents": 715.4680000000001,
+      "delayDays": 26,
+      "slaCreditCents": 1339,
+      "totalCents": 36488.868,
+      "eventId": "evt_06"
+    }
+  ]
+}

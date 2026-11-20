@@ -5,6 +5,7 @@ const path = require('path');
 const https = require('https');
 const os = require('os');
 const readline = require('readline');
+const { execSync } = require('child_process');
 const pkg = require('../package.json');
 
 const homeDir = os.homedir();
@@ -14,6 +15,48 @@ if (args.includes('--version') || args.includes('-v')) {
   console.log(pkg.version);
   process.exit(0);
 }
+
+// RTK flags: --skip-rtk / --no-rtk and --install-rtk
+const skipRtk = args.includes('--skip-rtk') || args.includes('--no-rtk');
+const forceInstallRtk = args.includes('--install-rtk');
+
+function checkRtkInstalled() {
+  try {
+    const output = execSync('rtk --version 2>&1', { encoding: 'utf8', stdio: ['pipe', 'pipe', 'ignore'] });
+    return { installed: true, version: output.trim() };
+  } catch (err) {
+    return { installed: false, version: null };
+  }
+}
+
+function installRtk() {
+  console.log(`\n\x1b[34m\x1b[1m⚡ Installing RTK (Rust Token Killer)...\x1b[0m`);
+  try {
+    execSync('curl -fsSL https://raw.githubusercontent.com/rtk-ai/rtk/main/install.sh | sh', { stdio: 'inherit' });
+    console.log(`\x1b[32m✓ RTK installed successfully!\x1b[0m\n`);
+    return true;
+  } catch (err) {
+    console.error(`\x1b[31mFailed to install RTK automatically:\x1b[0m`, err.message);
+    console.log(`\x1b[36mYou can install RTK manually by running: curl -fsSL https://raw.githubusercontent.com/rtk-ai/rtk/main/install.sh | sh\x1b[0m\n`);
+    return false;
+  }
+}
+
+function promptRtkInstall() {
+  return new Promise((resolve) => {
+    const rl = readline.createInterface({
+      input: process.stdin,
+      output: process.stdout,
+    });
+    console.log(`\x1b[33m\x1b[1m\n⚡ RTK (Rust Token Killer) is recommended for 60-90% token savings on CLI operations.\x1b[0m`);
+    rl.question(`Would you like to install RTK now? [Y/n]: `, (answer) => {
+      rl.close();
+      const ans = answer.trim().toLowerCase();
+      resolve(ans === '' || ans === 'y' || ans === 'yes' || ans === 's' || ans === 'sim');
+    });
+  });
+}
+
 
 // Language resolution: default to 'en', switch to 'pt_br' if requested
 let lang = 'en';
@@ -142,6 +185,25 @@ async function run() {
     if (!targets) {
       console.log(`\x1b[33mInstallation cancelled by user.\x1b[0m`);
       process.exit(0);
+    }
+
+    // RTK Dependency Check & Setup
+    if (!skipRtk) {
+      const rtkStatus = checkRtkInstalled();
+      if (rtkStatus.installed) {
+        console.log(`  \x1b[32m✓\x1b[0m RTK detected: \x1b[1m${rtkStatus.version}\x1b[0m (CLI Token Saver Active)`);
+      } else if (forceInstallRtk) {
+        installRtk();
+      } else if (process.stdin.isTTY) {
+        const doInstall = await promptRtkInstall();
+        if (doInstall) {
+          installRtk();
+        } else {
+          console.log(`  \x1b[33mℹ\x1b[0m Continuing without RTK. (Token savings will rely on prompt rules only)`);
+        }
+      } else {
+        console.log(`  \x1b[33mℹ\x1b[0m RTK not found. Install RTK for 60-90% CLI token savings: \x1b[36mcurl -fsSL https://raw.githubusercontent.com/rtk-ai/rtk/main/install.sh | sh\x1b[0m`);
+      }
     }
 
     const rawUrl = `https://raw.githubusercontent.com/inclitoleo/ia-sincer/main/${selectedLang}/SKILL.md`;

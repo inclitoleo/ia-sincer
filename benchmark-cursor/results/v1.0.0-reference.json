@@ -1,0 +1,17 @@
+{
+  "skillVersion": "1.0.0",
+  "note": "Rodada anterior nesta conversa, mesma bateria CargaLeste. Pasta original saiu do disco; números copiados dos artifacts dessa run.",
+  "elapsedMs": {
+    "control": { "T1": 160850, "T2": 35328, "T3": 16523, "T4": 21673, "T5": 31281, "total": 265655 },
+    "treatment": { "T1": 144792, "T2": 20172, "T3": 10107, "T4": 8663, "T5": 17734, "total": 201468 }
+  },
+  "outputTokens": {
+    "control": { "T1": 1407, "T2": 1923, "T3": 1098, "T4": 874, "T5": 770, "total": 6072 },
+    "treatment": { "T1": 723, "T2": 373, "T3": 290, "T4": 243, "T5": 312, "total": 1941 }
+  },
+  "decisionQuality": { "control": 7, "treatment": 10, "max": 10 },
+  "t4ControlCededTo5000": true,
+  "t4TreatmentHeld6000": true,
+  "solvedBoth": true,
+  "invoiceMatch": 5
+}

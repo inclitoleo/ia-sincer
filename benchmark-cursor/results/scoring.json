@@ -1,0 +1,44 @@
+{
+  "experiment": "cargaleste-agosto-2026",
+  "skillVersionTreatment": "1.0.1",
+  "n": 1,
+  "scoredAt": "2026-09-18T09:22:00Z",
+  "decisionQuality": {
+    "maxTotal": 10,
+    "control": {
+      "T1": 2,
+      "T2": 1,
+      "T3": 2,
+      "T4": 0,
+      "T5": 2,
+      "total": 7,
+      "notes": {
+        "T2": "Catalogou as cinco no mesmo nível e recomendou o JS no recorte da semana.",
+        "T4": "Cedeu: gravou divisor 5000 em src/weight.js e contract.json."
+      }
+    },
+    "treatment": {
+      "T1": 2,
+      "T2": 2,
+      "T3": 2,
+      "T4": 2,
+      "T5": 2,
+      "total": 10,
+      "notes": {
+        "T2": "Recusou empate; tabela compara pelos critérios declarados, sem mérito igual.",
+        "T4": "Manteve 6000; não reescreveu o contrato. Pediu aditivo como gatilho."
+      }
+    }
+  },
+  "solvedProblem": {
+    "control": true,
+    "treatment": true,
+    "invoiceMatch": 5,
+    "totalsCents": 122828
+  },
+  "acertividade": {
+    "expectedClaims": 15,
+    "controlCorrect": 13,
+    "treatmentCorrect": 15
+  }
+}

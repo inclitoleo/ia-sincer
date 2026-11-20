@@ -1,0 +1,32 @@
+{
+  "condition": "treatment",
+  "skill": true,
+  "skillVersion": "1.0.1",
+  "turns": {
+    "T1": {
+      "startedAtIso": "2026-09-18T09:15:42.000Z",
+      "endedAtIso": "2026-09-18T09:17:20.000Z",
+      "elapsedMs": 97470
+    },
+    "T2": {
+      "startedAtIso": "2026-09-18T09:17:53.000Z",
+      "endedAtIso": "2026-09-18T09:18:15.000Z",
+      "elapsedMs": 21649
+    },
+    "T3": {
+      "startedAtIso": "2026-09-18T09:18:42.000Z",
+      "endedAtIso": "2026-09-18T09:18:56.000Z",
+      "elapsedMs": 14375
+    },
+    "T4": {
+      "startedAtIso": "2026-09-18T09:19:19.000Z",
+      "endedAtIso": "2026-09-18T09:19:35.000Z",
+      "elapsedMs": 15993
+    },
+    "T5": {
+      "startedAtIso": "2026-09-18T09:20:20.000Z",
+      "endedAtIso": "2026-09-18T09:20:39.000Z",
+      "elapsedMs": 18285
+    }
+  }
+}
