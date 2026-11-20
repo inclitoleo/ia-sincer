@@ -8,7 +8,7 @@ const files = ['en/SKILL.md', 'pt_br/SKILL.md'];
 const measurements = [];
 
 for (const relativePath of files) {
-  const content = fs.readFileSync(path.join(root, relativePath), 'utf8');
+  const content = fs.readFileSync(path.join(root, relativePath), 'utf8').replace(/\r\n/g, '\n');
   const frontmatter = content.match(/^---\n([\s\S]*?)\n---\n/);
 
   if (!frontmatter) throw new Error(`${relativePath}: missing YAML frontmatter`);
