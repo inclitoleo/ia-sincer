@@ -1,0 +1,10 @@
+{
+  "name": "cargaleste-faturamento",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Motor de faturamento de frete da CargaLeste — ciclo agosto/2026",
+  "main": "src/replay.js",
+  "scripts": {
+    "replay": "node src/replay.js"
+  }
+}

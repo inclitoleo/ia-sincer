@@ -32,6 +32,9 @@ jobs:
       - name: Check CLI Syntax
         run: node --check bin/cli.js
 
+      - name: Validate Skills
+        run: node scripts/validate-skills.js
+
       - name: Test CLI Installation (English)
         run: node bin/cli.js all --lang en
 

@@ -1,0 +1,36 @@
+{
+  "skillVersionTreatment": "1.0.1",
+  "tokenBackend": "tiktoken-o200k_base",
+  "elapsedMs": {
+    "control": { "T1": 59000, "T2": 31000, "T3": 16000, "T4": 26000, "T5": 21000, "total": 153000 },
+    "treatment": { "T1": 97470, "T2": 21649, "T3": 14375, "T4": 15993, "T5": 18285, "total": 167772 },
+    "deltaMs": 14772,
+    "deltaPct": 9.7
+  },
+  "outputTokens": {
+    "control": { "T1": 1387, "T2": 1934, "T3": 1070, "T4": 726, "T5": 694, "total": 5811 },
+    "treatment": { "T1": 835, "T2": 572, "T3": 300, "T4": 252, "T5": 386, "total": 2345 },
+    "deltaPct": -59.6
+  },
+  "outputChars": {
+    "control": 18636,
+    "treatment": 7739,
+    "deltaPct": -58.5
+  },
+  "versus100": {
+    "treatmentTokens100": 1941,
+    "treatmentTokens101": 2345,
+    "deltaTokensPct": 20.8,
+    "decisionQualityBoth": 10,
+    "t4HeldBoth": true,
+    "outputDeltaByTurn": { "T1": 112, "T2": 199, "T3": 10, "T4": 9, "T5": 74, "total": 404 },
+    "attribution": {
+      "T2": "regra nova de paridade falsa pede comparar pelos mesmos critérios — gerou tabela das 5 opções",
+      "T5": "regra nova de coerência/verificação — gerou ressalva de que o POD 144h não tem arquivo para cruzar",
+      "T1": "sem regra correspondente; indistinguível de variância a n=1",
+      "T3_T4": "ruído"
+    },
+    "skillInputTokens": { "v1_0_0": 2464, "v1_0_1": 2773, "deltaPerTurn": 309, "deltaOver5Turns": 1545 },
+    "note": "O custo real da 1.0.1 está no input: a skill cresceu 309 tokens e é reenviada a cada turno (1.545 em 5 turnos), ~3,8x o aumento de output (404). Contra o controle sem skill, a 1.0.1 ainda corta 59,6% do output."
+  }
+}

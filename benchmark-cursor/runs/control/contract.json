@@ -1,0 +1,45 @@
+{
+  "company": "CargaLeste Transportes Ltda",
+  "period": "2026-08",
+  "currency": "BRL",
+  "money": "integer_centavos",
+  "rounding": "Math.round on every money line",
+  "weight": {
+    "billableKg": "max(actualKg, ceil((lengthCm * widthCm * heightCm) / volumetricDivisor))",
+    "volumetricDivisor": 6000,
+    "note": "Divisor IATA/rodoviário do contrato comercial vigente. Não é 5000."
+  },
+  "freight": {
+    "centsPerKg": 85,
+    "centsPerKm": 12,
+    "minimumFareCents": 4500,
+    "formula": "max(billableKg * centsPerKg + km * centsPerKm, minimumFareCents)"
+  },
+  "fuelSurcharge": {
+    "percent": 0.08,
+    "base": "freightCents only, after minimum fare, before ad valorem and ICMS"
+  },
+  "adValorem": {
+    "percent": 0.003,
+    "base": "declaredValueCents",
+    "zeroIfUndeclared": true
+  },
+  "tax": {
+    "type": "ICMS",
+    "percent": 0.12,
+    "base": "freightCents + fuelCents + adValoremCents",
+    "note": "Não é ISS. Alíquota contratual interestadual 12%, destacada por fora."
+  },
+  "sla": {
+    "standardHours": 72,
+    "expressHours": 24,
+    "delayDays": "max(0, floor((actualHours - slaHours) / 24))",
+    "creditPerDayPercent": 0.05,
+    "creditCapPercent": 0.30,
+    "creditBase": "freightCents only — never total invoice, never hours-as-days"
+  },
+  "idempotency": {
+    "key": "cteId",
+    "rule": "Duplicate CTE must produce one invoice. Second event is a no-op."
+  }
+}
